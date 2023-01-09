@@ -80,19 +80,6 @@ class UserDataSource{
                                                                                        "lastName":user.lastName,
                                                                                        "uid":user.uid,
                                                                                          "fav":user.fav])
-                
-                /*
-                do {
-                    try Firestore.firestore().collection("user").document(user.uid).setData(["email":user.email,
-                                                                                           "firstName":user.firstName,
-                                                                                           "lastName":user.lastName,
-                                                                                           "uid":user.uid,
-                                                                                             "fav":user.fav])
-                }
-                catch {
-                  print(error)
-                }
-                 */
             }
             self.delegate?.favChanged(added: !contains)
         }

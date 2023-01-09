@@ -154,6 +154,7 @@ class DataSource {
     
     func getFavFoods(idMeals:[String?]) {
         let session = URLSession.shared
+        self.foodArray = []
         for idMeal in idMeals{
             if let idMeal = idMeal,
                let url = URL(string: "\(baseURL)/lookup.php?i=\(idMeal)") {
@@ -167,6 +168,7 @@ class DataSource {
                         self.apiModel = try! JSONDecoder().decode(ApiModel.self, from: data)
                         if let foodDetail = self.apiModel?.meals[0]{
                             self.foodArray.append(foodDetail)
+                            self.foodArray.sort { $0.idMeal! > $1.idMeal! }
                         }
 
                     }

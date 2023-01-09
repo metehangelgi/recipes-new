@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController {
     let userDataSource = UserDataSource()
     // private let db=Database.database().reference()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,7 +34,6 @@ class ProfileViewController: UIViewController {
         self.navigationItem.titleView = UIView()
         dataSource.delegate = self
         userDataSource.delegate = self
-        
         
     }
     
@@ -136,6 +136,7 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController:DataDelegate{
     func foodListLoaded(){
         self.foodsTableView.reloadData()
+        
     }
 }
 
@@ -143,6 +144,7 @@ extension ProfileViewController:UserDataSourceDelegate{
     func currentUserDetailLoaded(user:User) {
         self.usernameLabel.text = "\(user.firstName) \(user.lastName)"
         dataSource.getFavFoods(idMeals: user.fav)
+        
     }
     
 }

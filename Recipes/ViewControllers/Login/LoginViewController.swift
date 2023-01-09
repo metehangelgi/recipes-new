@@ -106,6 +106,7 @@ extension LoginViewController: UserAuthenticationDelegate {
             self.errorLabel.alpha = 1
             
             navigationController?.popToRootViewController(animated: true)
+            self.tabBarController?.selectedIndex = 0
             //let screen = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TabController") as? UITabBarController
             //self.navigationController?.pushViewController(screen!, animated: true)
         } else {

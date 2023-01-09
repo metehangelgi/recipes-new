@@ -43,21 +43,6 @@ class RegisterViewController: UIViewController {
     }
     */
     
-    @IBAction func goLogin(_ sender: Any) {
-        let screen = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Login") as? LoginViewController
-        
-        if let controllers = navigationController?.viewControllers.count {
-            if controllers >= 3 {
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                self.navigationController?.pushViewController(screen!, animated: true)
-            }
-        }
-        //self.navigationController?.popToViewController(navigationController!.viewControllers[1], animated: true)
-        //self.navigationController?.popToViewController(screen!, animated: true)
-        //self.navigationController?.pushViewController(screen!, animated: true)
-    }
-    
     @IBAction func signUp(_ sender: Any) {
         if let email = email.text,let password = password.text, let firstname = firstname.text, let lastname=lastname.text,
            !email.isEmpty,!password.isEmpty,!firstname.isEmpty,!lastname.isEmpty{
@@ -100,8 +85,9 @@ extension RegisterViewController: UserAuthenticationDelegate {
         self.errorLabel.text = resultText
         self.errorLabel.backgroundColor = UIColor.systemGreen
         self.errorLabel.alpha = 1
-        navigationController?.popToRootViewController(animated: true)
         
+        navigationController?.popToRootViewController(animated: true)
+        self.tabBarController?.selectedIndex = 0
         
         //let screen = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainScreen") as? HomeViewController
         //self.navigationController?.pushViewController(screen!, animated: true)
