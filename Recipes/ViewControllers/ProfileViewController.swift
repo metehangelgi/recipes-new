@@ -73,13 +73,6 @@ class ProfileViewController: UIViewController {
 
     }
     
-    
-    @IBAction func goLogin(_ sender: Any) {
-        let screen = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Login") as? LoginViewController
-        self.navigationController?.pushViewController(screen!, animated: true)
-        //self.navigationController?.popToRootViewController(animated: true)
-    }
-    
 
     
     // MARK: - Navigation

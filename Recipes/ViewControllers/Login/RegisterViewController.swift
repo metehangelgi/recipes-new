@@ -62,6 +62,18 @@ class RegisterViewController: UIViewController {
         
     }
     
+    @IBAction func goLogin(_ sender: Any) {
+        let screen = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Login") as? LoginViewController
+        
+        if let controllers = navigationController?.viewControllers.count {
+            if controllers >= 3 {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                self.navigationController?.pushViewController(screen!, animated: true)
+            }
+        }
+    }
+    
     func disaplayErrorMessage(_ theMessage:String) //error label function
     {
         let alert = UIAlertController(title: "Alert", message: theMessage, preferredStyle: UIAlertController.Style.alert);
