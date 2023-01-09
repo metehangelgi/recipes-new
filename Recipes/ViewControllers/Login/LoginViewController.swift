@@ -31,6 +31,21 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.title = "Sign in"
         userAuthenticaionHelper.userDelegate = self
+        
+        //Looks for single or multiple taps.
+         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+
+        view.addGestureRecognizer(tap)
+
+    }
+    
+    //Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
 
@@ -82,6 +97,8 @@ class LoginViewController: UIViewController {
     
     }
     
+    
+    
 }
 
 extension LoginViewController: UserAuthenticationDelegate {
@@ -105,16 +122,32 @@ extension LoginViewController: UserAuthenticationDelegate {
             errorLabel.backgroundColor = UIColor.systemGreen
             self.errorLabel.alpha = 1
             
-            navigationController?.popToRootViewController(animated: true)
-            self.tabBarController?.selectedIndex = 0
-            //let screen = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TabController") as? UITabBarController
-            //self.navigationController?.pushViewController(screen!, animated: true)
+            
+            self.disaplayInfoMessage("Welcome Again to Recipes App")
+            //self.navigationController?.popToRootViewController(animated: true)
+            //self.tabBarController?.selectedIndex = 0
         } else {
-            errorLabel.text = resultText
+            errorLabel.text = "Email or password is incorrect"
             errorLabel.backgroundColor = UIColor.systemRed
             self.errorLabel.alpha = 1
         }
         
     }
     
+    func disaplayInfoMessage(_ theMessage:String) //error label function
+    {
+        let alert = UIAlertController(title: "Hello", message: theMessage, preferredStyle: UIAlertController.Style.alert);
+        let okButton = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) {
+            action in
+                self.navigationController?.popToRootViewController(animated: true)
+            
+            
+        }
+        alert.addAction(okButton);
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
 }
+
+

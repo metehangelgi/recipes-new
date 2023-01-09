@@ -31,6 +31,20 @@ class RegisterViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.title = "Sign up"
         userAuthenticaionHelper.userDelegate = self
+        
+        //Looks for single or multiple taps.
+         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+
+        view.addGestureRecognizer(tap)
+    }
+    
+    //Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     /*
@@ -84,7 +98,16 @@ class RegisterViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    
+    func disaplayInfoMessage(_ theMessage:String) //error label function
+    {
+        let alert = UIAlertController(title: "Alert", message: theMessage, preferredStyle: UIAlertController.Style.alert);
+        let okButton = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) {
+            action in
+                self.navigationController?.popToRootViewController(animated: true)
+        }
+        alert.addAction(okButton);
+        self.present(alert, animated: true, completion: nil)
+    }
 
 }
 
@@ -98,8 +121,10 @@ extension RegisterViewController: UserAuthenticationDelegate {
         self.errorLabel.backgroundColor = UIColor.systemGreen
         self.errorLabel.alpha = 1
         
-        navigationController?.popToRootViewController(animated: true)
-        self.tabBarController?.selectedIndex = 0
+        self.disaplayInfoMessage("Welcome to Recipes App")
+        //navigationController?.popToRootViewController(animated: true)
+        //self.tabBarController?.selectedIndex = 0
+        
         
         //let screen = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainScreen") as? HomeViewController
         //self.navigationController?.pushViewController(screen!, animated: true)

@@ -18,7 +18,7 @@ class FoodDetailViewController: UIViewController {
     @IBOutlet weak var favouriteButton: UIButton!
     @IBOutlet weak var categoryButton: UIButton!
     
-    @IBOutlet weak var foodRecipeText: UITextView!
+    var foodRecipeText: String?
     
     var foodIdentifier: String?
     let dataSource = DataSource()
@@ -79,6 +79,14 @@ class FoodDetailViewController: UIViewController {
         userDataSource.addFavMeal(with: foodIdentifier)
     }
     
+    
+    @IBAction func goInsturctions(_ sender: Any) {
+        let screen = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Instructions") as? InstructionsViewController
+        screen!.instructionIdentifier = foodRecipeText
+        
+        self.navigationController?.pushViewController(screen!, animated: true)
+    }
+    
 
     
 
@@ -89,11 +97,13 @@ class FoodDetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        
         if let categoryLabel:String = categoryButton.currentTitle,
            let foodsController = segue.destination as? FoodsViewController {
          foodsController.categoryIdentifier = categoryLabel
      }
+        
+        
+        
     }
     
 
@@ -135,7 +145,7 @@ extension FoodDetailViewController: DataDelegate{
         foodNameLabel.text = food.strMeal
         areaButton.setTitle(food.strArea, for: .normal)
         categoryButton.setTitle(food.strCategory, for: .normal)
-        foodRecipeText.text = food.strInstructions
+        foodRecipeText = food.strInstructions
         
         //foodImage.image = UIImage(data: foodImageData)
         if let strMealThumb = food.strMealThumb{
